@@ -1,19 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Vue Demonstration Application</h1>
+    <hr>
+    <label>
+      <input type="number" v-model="degs">
+    </label>
+    <button @click="addPower">Add Power</button>
+    <hr>
+    <PowersList :degsArr="degsArr"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import PowersList from '@/components/PowersList';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PowersList
+  },
+  data() {
+    return {
+      degs: 5
+    };
+  },
+  methods: {
+    addPower() {
+      this.degs = +this.degs + 1;
+    }
+  },
+  computed: {
+    degsArr() {
+      return Array.from({ length: this.degs }, (v, i) => 10 + i);
+    }
   }
-}
+};
 </script>
 
 <style>
